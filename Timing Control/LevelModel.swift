@@ -54,13 +54,63 @@ struct MetroLevel: Identifiable {
 }
 
 // All level definitions, increasing in complexity.
+//
+// Chapter 1 (indices 0..5) is the six hand-authored intro levels below.
+// Chapters 2..9 are produced by a deterministic, seeded procedural generator
+// (MetroLevelGenerator) that emits clean, valid, solvable maps from a set of
+// structured archetype templates. Generated levels are cached so a given index
+// always returns the same MetroLevel instance.
 enum MetroLevels {
-    static let all: [MetroLevel] = [
+    static let levelsPerChapter = 6
+    static let chapterCount = 9
+    static var totalLevels: Int { levelsPerChapter * chapterCount }   // 54
+
+    // The six hand-authored intro levels (Chapter 1).
+    private static let handAuthored: [MetroLevel] = [
         level1(), level2(), level3(), level4(), level5(), level6()
     ]
 
+    // Cache of generated levels by global index.
+    private static var generatedCache: [Int: MetroLevel] = [:]
+
     static func get(_ index: Int) -> MetroLevel {
-        all[min(max(index, 0), all.count - 1)]
+        let i = min(max(index, 0), totalLevels - 1)
+        if i < handAuthored.count {
+            return handAuthored[i]
+        }
+        if let cached = generatedCache[i] {
+            return cached
+        }
+        let lvl = MetroLevelGenerator.generate(globalIndex: i)
+        generatedCache[i] = lvl
+        return lvl
+    }
+
+    // MARK: Chapter helpers
+
+    static func chapter(of index: Int) -> Int {
+        max(0, min(index, totalLevels - 1)) / levelsPerChapter
+    }
+
+    static func indices(inChapter chapter: Int) -> [Int] {
+        let start = chapter * levelsPerChapter
+        return Array(start..<min(start + levelsPerChapter, totalLevels))
+    }
+
+    static func chapterName(_ chapter: Int) -> String {
+        let names = [
+            "Getting Started",
+            "Shared Tracks",
+            "Junction City",
+            "The Spines",
+            "Ring Lines",
+            "Crossfire",
+            "Grand Network",
+            "Rush District",
+            "Master Control"
+        ]
+        guard chapter >= 0 && chapter < names.count else { return "Chapter \(chapter + 1)" }
+        return names[chapter]
     }
 
     // ---- Level 1: two lines crossing at a single shared segment ----

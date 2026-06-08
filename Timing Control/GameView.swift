@@ -276,7 +276,7 @@ struct GameView: View {
                 }
 
                 VStack(spacing: 10) {
-                    if won && levelIndex < MetroLevels.all.count - 1 {
+                    if won && levelIndex < MetroLevels.totalLevels - 1 {
                         Button(action: { onExit() }) {
                             resultButtonLabel("Level Map", filled: true)
                         }
@@ -328,7 +328,7 @@ struct GameView: View {
         guard !didRecord else { return }
         didRecord = true
         progress.recordResult(level: levelIndex, stars: stars, time: time,
-                              totalLevels: MetroLevels.all.count)
+                              totalLevels: MetroLevels.totalLevels)
     }
 }
 

@@ -193,6 +193,112 @@ struct MetroFlagIcon: View {
     }
 }
 
+// MARK: - Tab bar icons (custom Shapes)
+
+// Play tab: a route/network glyph (two stations linked by a track).
+struct MetroPlayTabIcon: View {
+    var size: CGFloat
+    var color: Color
+    var body: some View {
+        GeometryReader { geo in
+            let w = geo.size.width
+            let h = geo.size.height
+            ZStack {
+                Path { p in
+                    p.move(to: CGPoint(x: w * 0.22, y: h * 0.74))
+                    p.addLine(to: CGPoint(x: w * 0.78, y: h * 0.26))
+                }
+                .stroke(color, style: StrokeStyle(lineWidth: w * 0.12, lineCap: .round))
+                Circle().fill(color).frame(width: w * 0.26, height: w * 0.26)
+                    .position(x: w * 0.22, y: h * 0.74)
+                Circle().fill(color).frame(width: w * 0.26, height: w * 0.26)
+                    .position(x: w * 0.78, y: h * 0.26)
+            }
+        }
+        .frame(width: size, height: size)
+    }
+}
+
+// Rush tab: a fast-forward (double chevron) glyph.
+struct MetroRushTabIcon: View {
+    var size: CGFloat
+    var color: Color
+    var body: some View {
+        HStack(spacing: -size * 0.08) {
+            Triangle().fill(color).frame(width: size * 0.42, height: size * 0.5)
+            Triangle().fill(color).frame(width: size * 0.42, height: size * 0.5)
+        }
+        .frame(width: size, height: size)
+    }
+}
+
+// Awards tab: a rosette / medal (star inside a circle with a ribbon).
+struct MetroAwardTabIcon: View {
+    var size: CGFloat
+    var color: Color
+    var body: some View {
+        GeometryReader { geo in
+            let w = geo.size.width
+            let h = geo.size.height
+            ZStack {
+                // ribbon
+                Path { p in
+                    p.move(to: CGPoint(x: w * 0.38, y: h * 0.62))
+                    p.addLine(to: CGPoint(x: w * 0.30, y: h * 0.95))
+                    p.addLine(to: CGPoint(x: w * 0.50, y: h * 0.80))
+                    p.addLine(to: CGPoint(x: w * 0.70, y: h * 0.95))
+                    p.addLine(to: CGPoint(x: w * 0.62, y: h * 0.62))
+                    p.closeSubpath()
+                }
+                .fill(color.opacity(0.7))
+                Circle().fill(color).frame(width: w * 0.6, height: w * 0.6)
+                    .position(x: w * 0.5, y: h * 0.38)
+                StarShape(points: 5)
+                    .fill(MetroTheme.panel)
+                    .frame(width: w * 0.34, height: w * 0.34)
+                    .position(x: w * 0.5, y: h * 0.38)
+            }
+        }
+        .frame(width: size, height: size)
+    }
+}
+
+// More tab: three horizontal lines (menu).
+struct MetroMoreTabIcon: View {
+    var size: CGFloat
+    var color: Color
+    var body: some View {
+        VStack(spacing: size * 0.16) {
+            ForEach(0..<3, id: \.self) { _ in
+                Capsule().fill(color).frame(width: size * 0.7, height: size * 0.12)
+            }
+        }
+        .frame(width: size, height: size)
+    }
+}
+
+// A palette / themes glyph (swatch grid).
+struct MetroThemeIcon: View {
+    var size: CGFloat
+    var color: Color
+    var body: some View {
+        GeometryReader { geo in
+            let w = geo.size.width
+            ZStack {
+                RoundedRectangle(cornerRadius: w * 0.18)
+                    .fill(color.opacity(0.85))
+                    .frame(width: w * 0.74, height: w * 0.74)
+                HStack(spacing: w * 0.06) {
+                    Circle().fill(MetroTheme.panel).frame(width: w * 0.16, height: w * 0.16)
+                    Circle().fill(MetroTheme.panel.opacity(0.7)).frame(width: w * 0.16, height: w * 0.16)
+                }
+            }
+            .frame(width: w, height: geo.size.height)
+        }
+        .frame(width: size, height: size)
+    }
+}
+
 // A circular station node.
 struct MetroStationDot: View {
     var size: CGFloat

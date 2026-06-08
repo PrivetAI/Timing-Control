@@ -1,46 +1,64 @@
 import SwiftUI
 
-struct SettingsView: View {
-    @Binding var isPresented: Bool
+// The "More" tab: settings + how-to-play + a Themes card + reset + privacy.
+// The privacy panel uses the SAME MetroWebPanel and URL as before (gate untouched).
+struct MoreView: View {
     @ObservedObject private var progress = MetroProgressStore.shared
     @State private var showPrivacy = false
+    @State private var showThemes = false
     @State private var showResetConfirm = false
 
     var body: some View {
         ZStack {
             MetroTheme.background.ignoresSafeArea()
             VStack(spacing: 0) {
-                // Header
                 HStack {
-                    Text("Settings")
+                    Text("More")
                         .font(.system(size: 22, weight: .heavy, design: .rounded))
                         .foregroundColor(MetroTheme.ink)
                     Spacer()
-                    Button(action: { isPresented = false }) {
-                        Text("Done")
-                            .font(.system(size: 16, weight: .bold, design: .rounded))
-                            .foregroundColor(MetroTheme.primary)
-                    }
                 }
                 .padding(.horizontal, 20)
-                .padding(.top, 22)
-                .padding(.bottom, 16)
+                .padding(.top, 16)
+                .padding(.bottom, 12)
 
                 ScrollView {
                     VStack(spacing: 14) {
-                        // Stats card
+                        // Stats summary
                         VStack(alignment: .leading, spacing: 10) {
                             Text("YOUR DISPATCH RECORD")
                                 .font(.system(size: 11, weight: .heavy, design: .rounded))
                                 .foregroundColor(MetroTheme.inkSoft)
-                            statRow(label: "Total stars",
-                                    value: "\(progress.totalStars()) / \(MetroLevels.all.count * 3)")
-                            statRow(label: "Lines unlocked",
-                                    value: "\(min(progress.highestUnlocked + 1, MetroLevels.all.count)) / \(MetroLevels.all.count)")
+                            statRow("Total stars",
+                                    "\(progress.totalStars()) / \(MetroLevels.totalLevels * 3)")
+                            statRow("Levels unlocked",
+                                    "\(min(progress.highestUnlocked + 1, MetroLevels.totalLevels)) / \(MetroLevels.totalLevels)")
+                            statRow("Best Rush score", "\(progress.rushBestScore)")
                         }
                         .padding(16)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .background(card)
+
+                        // Themes card -> opens ThemesView
+                        Button(action: { showThemes = true }) {
+                            HStack(spacing: 12) {
+                                MetroThemeIcon(size: 28, color: MetroSkins.active.swatch)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("Themes")
+                                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                                        .foregroundColor(MetroTheme.ink)
+                                    Text(MetroSkins.active.name)
+                                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                                        .foregroundColor(MetroTheme.inkSoft)
+                                }
+                                Spacer()
+                                MetroBackIcon(size: 18, color: MetroTheme.inkSoft)
+                                    .rotationEffect(.degrees(180))
+                            }
+                            .padding(16)
+                            .background(card)
+                        }
+                        .buttonStyle(PlainButtonStyle())
 
                         // How to play
                         VStack(alignment: .leading, spacing: 10) {
@@ -94,12 +112,13 @@ struct SettingsView: View {
                 }
             }
 
-            if showResetConfirm {
-                resetConfirmOverlay
-            }
+            if showResetConfirm { resetConfirmOverlay }
         }
         .sheet(isPresented: $showPrivacy) {
             MetroWebPanel(urlString: "https://timingcontrol.org/click.php")
+        }
+        .sheet(isPresented: $showThemes) {
+            ThemesView(isPresented: $showThemes)
         }
     }
 
@@ -109,7 +128,7 @@ struct SettingsView: View {
             .shadow(color: MetroTheme.shadow, radius: 3, y: 1)
     }
 
-    private func statRow(label: String, value: String) -> some View {
+    private func statRow(_ label: String, _ value: String) -> some View {
         HStack {
             Text(label)
                 .font(.system(size: 14, weight: .medium, design: .rounded))
@@ -128,7 +147,7 @@ struct SettingsView: View {
                 Text("Reset all progress?")
                     .font(.system(size: 18, weight: .heavy, design: .rounded))
                     .foregroundColor(MetroTheme.ink)
-                Text("This clears every star, best time, and unlocked line.")
+                Text("This clears every star, best time, unlocked level, achievement and Rush best.")
                     .font(.system(size: 14, weight: .medium, design: .rounded))
                     .foregroundColor(MetroTheme.inkSoft)
                     .multilineTextAlignment(.center)
