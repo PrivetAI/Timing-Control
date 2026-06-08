@@ -57,7 +57,6 @@ struct AwardsView: View {
             statRow("3-star levels", "\(progress.threeStarCount())")
             statRow("Chapters cleared", "\(chaptersCleared) / \(MetroLevels.chapterCount)")
             statRow("Best clean streak", "\(progress.bestNoCollisionStreak)")
-            statRow("Best Rush score", "\(progress.rushBestScore)")
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)

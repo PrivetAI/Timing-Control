@@ -5,7 +5,7 @@ import SwiftUI
 // GameView overlay lives inside the Play tab (PlayView) and, while a level is open,
 // the tab bar hides so the game is full-screen.
 struct RootMenuView: View {
-    enum Tab: Int, CaseIterable { case play, rush, awards, more }
+    enum Tab: Int, CaseIterable { case play, themes, awards, more }
 
     @State private var tab: Tab = .play
     @State private var inLevel = false
@@ -18,7 +18,7 @@ struct RootMenuView: View {
             Group {
                 switch tab {
                 case .play:   PlayView(inLevel: $inLevel)
-                case .rush:   RushView()
+                case .themes: ThemesView()
                 case .awards: AwardsView()
                 case .more:   MoreView()
                 }
@@ -37,7 +37,7 @@ struct RootMenuView: View {
     private var tabBar: some View {
         HStack(spacing: 0) {
             tabButton(.play, "Play")
-            tabButton(.rush, "Rush")
+            tabButton(.themes, "Themes")
             tabButton(.awards, "Awards")
             tabButton(.more, "More")
         }
@@ -71,7 +71,7 @@ struct RootMenuView: View {
     private func tabIcon(_ t: Tab, color: Color) -> some View {
         switch t {
         case .play:   MetroPlayTabIcon(size: 26, color: color)
-        case .rush:   MetroRushTabIcon(size: 26, color: color)
+        case .themes: MetroThemeIcon(size: 26, color: color)
         case .awards: MetroAwardTabIcon(size: 26, color: color)
         case .more:   MetroMoreTabIcon(size: 26, color: color)
         }

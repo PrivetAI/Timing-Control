@@ -22,8 +22,6 @@
 		A001000000000000000020 /* MetroAchievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001000000000000000020 /* MetroAchievements.swift */; };
 		A001000000000000000021 /* MetroSkins.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001000000000000000021 /* MetroSkins.swift */; };
 		A001000000000000000022 /* MetroLevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001000000000000000022 /* MetroLevelGenerator.swift */; };
-		A001000000000000000023 /* MetroRushEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001000000000000000023 /* MetroRushEngine.swift */; };
-		A001000000000000000024 /* RushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001000000000000000024 /* RushView.swift */; };
 		A001000000000000000025 /* AwardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001000000000000000025 /* AwardsView.swift */; };
 		A001000000000000000026 /* ThemesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001000000000000000026 /* ThemesView.swift */; };
 		A001000000000000000027 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001000000000000000027 /* MoreView.swift */; };
@@ -47,8 +45,6 @@
 		B001000000000000000020 /* MetroAchievements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetroAchievements.swift; sourceTree = "<group>"; };
 		B001000000000000000021 /* MetroSkins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetroSkins.swift; sourceTree = "<group>"; };
 		B001000000000000000022 /* MetroLevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetroLevelGenerator.swift; sourceTree = "<group>"; };
-		B001000000000000000023 /* MetroRushEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetroRushEngine.swift; sourceTree = "<group>"; };
-		B001000000000000000024 /* RushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RushView.swift; sourceTree = "<group>"; };
 		B001000000000000000025 /* AwardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardsView.swift; sourceTree = "<group>"; };
 		B001000000000000000026 /* ThemesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesView.swift; sourceTree = "<group>"; };
 		B001000000000000000027 /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
@@ -88,14 +84,12 @@
 				B001000000000000000008 /* GameView.swift */,
 				B001000000000000000009 /* RootMenuView.swift */,
 				B001000000000000000028 /* PlayView.swift */,
-				B001000000000000000024 /* RushView.swift */,
 				B001000000000000000025 /* AwardsView.swift */,
 				B001000000000000000027 /* MoreView.swift */,
 				B001000000000000000026 /* ThemesView.swift */,
 				B001000000000000000020 /* MetroAchievements.swift */,
 				B001000000000000000021 /* MetroSkins.swift */,
 				B001000000000000000022 /* MetroLevelGenerator.swift */,
-				B001000000000000000023 /* MetroRushEngine.swift */,
 				B001000000000000000011 /* MetroWebPanel.swift */,
 				B001000000000000000012 /* MetroLoadingScreen.swift */,
 				B001000000000000000013 /* Assets.xcassets */,
@@ -191,14 +185,12 @@
 				A001000000000000000008 /* GameView.swift in Sources */,
 				A001000000000000000009 /* RootMenuView.swift in Sources */,
 				A001000000000000000028 /* PlayView.swift in Sources */,
-				A001000000000000000024 /* RushView.swift in Sources */,
 				A001000000000000000025 /* AwardsView.swift in Sources */,
 				A001000000000000000027 /* MoreView.swift in Sources */,
 				A001000000000000000026 /* ThemesView.swift in Sources */,
 				A001000000000000000020 /* MetroAchievements.swift in Sources */,
 				A001000000000000000021 /* MetroSkins.swift in Sources */,
 				A001000000000000000022 /* MetroLevelGenerator.swift in Sources */,
-				A001000000000000000023 /* MetroRushEngine.swift in Sources */,
 				A001000000000000000011 /* MetroWebPanel.swift in Sources */,
 				A001000000000000000012 /* MetroLoadingScreen.swift in Sources */,
 			);

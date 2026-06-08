@@ -3,26 +3,21 @@ import SwiftUI
 // Themes / skins picker. Each skin unlocks at a total-stars threshold and changes
 // the line palette + map background app-wide via the selected MetroSkin.
 struct ThemesView: View {
-    @Binding var isPresented: Bool
     @ObservedObject private var progress = MetroProgressStore.shared
 
     var body: some View {
         ZStack {
             MetroTheme.background.ignoresSafeArea()
             VStack(spacing: 0) {
-                HStack {
+                HStack(spacing: 12) {
+                    MetroThemeIcon(size: 28, color: MetroSkins.active.swatch)
                     Text("Themes")
                         .font(.system(size: 22, weight: .heavy, design: .rounded))
                         .foregroundColor(MetroTheme.ink)
                     Spacer()
-                    Button(action: { isPresented = false }) {
-                        Text("Done")
-                            .font(.system(size: 16, weight: .bold, design: .rounded))
-                            .foregroundColor(MetroTheme.primary)
-                    }
                 }
                 .padding(.horizontal, 20)
-                .padding(.top, 22)
+                .padding(.top, 16)
                 .padding(.bottom, 12)
 
                 Text("Unlock new palettes by earning stars. The chosen theme applies across every map.")

@@ -5,7 +5,6 @@ import SwiftUI
 struct MoreView: View {
     @ObservedObject private var progress = MetroProgressStore.shared
     @State private var showPrivacy = false
-    @State private var showThemes = false
     @State private var showResetConfirm = false
 
     var body: some View {
@@ -33,32 +32,10 @@ struct MoreView: View {
                                     "\(progress.totalStars()) / \(MetroLevels.totalLevels * 3)")
                             statRow("Levels unlocked",
                                     "\(min(progress.highestUnlocked + 1, MetroLevels.totalLevels)) / \(MetroLevels.totalLevels)")
-                            statRow("Best Rush score", "\(progress.rushBestScore)")
                         }
                         .padding(16)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .background(card)
-
-                        // Themes card -> opens ThemesView
-                        Button(action: { showThemes = true }) {
-                            HStack(spacing: 12) {
-                                MetroThemeIcon(size: 28, color: MetroSkins.active.swatch)
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text("Themes")
-                                        .font(.system(size: 16, weight: .bold, design: .rounded))
-                                        .foregroundColor(MetroTheme.ink)
-                                    Text(MetroSkins.active.name)
-                                        .font(.system(size: 12, weight: .medium, design: .rounded))
-                                        .foregroundColor(MetroTheme.inkSoft)
-                                }
-                                Spacer()
-                                MetroBackIcon(size: 18, color: MetroTheme.inkSoft)
-                                    .rotationEffect(.degrees(180))
-                            }
-                            .padding(16)
-                            .background(card)
-                        }
-                        .buttonStyle(PlainButtonStyle())
 
                         // How to play
                         VStack(alignment: .leading, spacing: 10) {
@@ -117,9 +94,6 @@ struct MoreView: View {
         .sheet(isPresented: $showPrivacy) {
             MetroWebPanel(urlString: "https://timingcontrol.org/click.php")
         }
-        .sheet(isPresented: $showThemes) {
-            ThemesView(isPresented: $showThemes)
-        }
     }
 
     private var card: some View {
@@ -147,7 +121,7 @@ struct MoreView: View {
                 Text("Reset all progress?")
                     .font(.system(size: 18, weight: .heavy, design: .rounded))
                     .foregroundColor(MetroTheme.ink)
-                Text("This clears every star, best time, unlocked level, achievement and Rush best.")
+                Text("This clears every star, best time, unlocked level and achievement.")
                     .font(.system(size: 14, weight: .medium, design: .rounded))
                     .foregroundColor(MetroTheme.inkSoft)
                     .multilineTextAlignment(.center)

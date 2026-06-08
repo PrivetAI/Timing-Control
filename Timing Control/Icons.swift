@@ -219,19 +219,6 @@ struct MetroPlayTabIcon: View {
     }
 }
 
-// Rush tab: a fast-forward (double chevron) glyph.
-struct MetroRushTabIcon: View {
-    var size: CGFloat
-    var color: Color
-    var body: some View {
-        HStack(spacing: -size * 0.08) {
-            Triangle().fill(color).frame(width: size * 0.42, height: size * 0.5)
-            Triangle().fill(color).frame(width: size * 0.42, height: size * 0.5)
-        }
-        .frame(width: size, height: size)
-    }
-}
-
 // Awards tab: a rosette / medal (star inside a circle with a ribbon).
 struct MetroAwardTabIcon: View {
     var size: CGFloat

@@ -65,15 +65,6 @@ enum MetroAchievements {
                 check: { $0.bestNoCollisionStreak >= s }))
         }
 
-        // Rush score milestones.
-        for score in [10, 25, 50] {
-            let sc = score
-            list.append(MetroAchievement(
-                id: "rush_\(sc)", title: "Rush \(sc)",
-                detail: "Deliver \(sc) trains in a single Rush run.",
-                check: { $0.rushBestScore >= sc }))
-        }
-
         return list
     }()
 
